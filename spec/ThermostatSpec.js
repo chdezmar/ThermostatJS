@@ -67,5 +67,22 @@ describe("Thermostat", function() {
       expect(thermostat.checkTemp()).toEqual(20);
     });
   });
-
+  
+  describe("Energy usage",function() {
+    it("returns low usage when temperature is below 18", function(){
+      for(var i = 1; i < 5; i++){
+        thermostat.down();
+      }
+      expect(thermostat.energyUsage()).toEqual("low-usage");
+    });
+    it("returns medium usage when temperature is below 25", function(){
+      expect(thermostat.energyUsage()).toEqual("medium-usage");
+    });
+    it("returns high usage when temperature is 25 or higher", function(){
+      for(var i = 1; i < 10; i++){
+        thermostat.up();
+      }
+      expect(thermostat.energyUsage()).toEqual("high-usage");
+    });
+  });
 });
