@@ -31,6 +31,7 @@ Thermostat.prototype = {
     this._powerSaving = !this._powerSaving;
     if(this._powerSaving) { this._maxTemp = 25};
     if(!this._powerSaving) { this._maxTemp = 32};
+    if(this._temperature > this._maxTemp) { this._temperature = this._maxTemp};
   },
   reset: function(){
     this._temperature = 20;
