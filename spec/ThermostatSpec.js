@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe("Thermostat", function() {
   describe("checkTemp", function() {
@@ -28,4 +28,44 @@ describe("Thermostat", function() {
       expect(thermostat.checkTemp()).toEqual(18);
     });
   });
+
+  describe("minimum value:", function(){
+    it("refuses to go below the minimum", function(){
+      for(var i = 1; i < 21; i++){
+        thermostat.down();
+      }
+      expect(thermostat.checkTemp()).toEqual(10);
+    });
+  });
+
+  describe("Power Saving Mode", function() {
+    it("it is On by default", function() {
+      expect(thermostat._powerSaving).toBe(true)
+    });
+
+    it("when On, max temp is 25", function() {
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      expect(thermostat.checkTemp()).toEqual(25)
+    });
+    it("when Off, max temp is 32", function() {
+      thermostat.togglePowerSaving();
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      expect(thermostat.checkTemp()).toEqual(32)
+    });
+  });
+
+  describe("Reset", function() {
+    it("resets the temperature to 20", function() {
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      thermostat.reset();
+      expect(thermostat.checkTemp()).toEqual(20);
+    });
+  });
+
 });
