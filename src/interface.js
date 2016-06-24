@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
+  tempBarUpdate(thermostat.checkTemp());
   var update = function(){
     $('#current').text(thermostat.checkTemp() + " power saving mode is " + thermostat._powerSaving);
     $('#temp-display').attr('class', thermostat.energyUsage());
@@ -8,10 +9,12 @@ $(document).ready(function() {
   $('#up').on('click', function(){
     thermostat.up();
     update();
+    tempBarUpdate(thermostat.checkTemp());
   });
   $('#down').on('click', function(){
     thermostat.down();
     update();
+    tempBarUpdate(thermostat.checkTemp());
   });
   $('#powersaving').on('click', function(){
     thermostat.togglePowerSaving();
@@ -19,6 +22,7 @@ $(document).ready(function() {
   });
   $('#reset').on('click', function(){
     thermostat.reset();
+    tempBarUpdate(thermostat.checkTemp());
     update();
   });
 
@@ -34,6 +38,10 @@ $(document).ready(function() {
     event.preventDefault();
     updateWeather($('#city-form option:selected').val());
   });
+
+  function tempBarUpdate(checkTemp) {
+    $('#temp-bar').width(checkTemp / 32 * 100 + '%');
+  }
 
 
 });

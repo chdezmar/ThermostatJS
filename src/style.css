@@ -25,13 +25,20 @@
 .up-button,
 .down-button{
   float: left;
-  width: 50%;
-
 }
 
 #temp-display{
   border-radius: 5px;
   height: 20px;
+  position: relative;
+  background-color: black;
+}
+
+#temp-bar {
+  height: 100%;
+  width: 10%;
+  background-color: green;
+  position: relative;
 }
 
 #current{
