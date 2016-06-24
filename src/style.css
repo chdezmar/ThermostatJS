@@ -1,12 +1,89 @@
+.status-container{
+  width: 60%;
+  float: left;
+}
+
+.thermostat-container{
+  width: 40%;
+  float: left;
+}
+
+
+.weather-container{
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+.psm-button,
+.reset-button{
+  width: 100%;
+  display: block;
+}
+
+.up-button,
+.down-button{
+  width: 45%;
+
+}
+
+
+
+
+
+
+
+body,input,button{
+  font-family: 'Space Mono', monospace;
+}
+
+button,input[type="submit"]{
+  background-color: transparent;
+  border: solid 2px black;
+}
+
+button:focus,
+input[type="submit"]:focus{
+  outline: none;
+}
+
+button:active,
+input[type="submit"]:active{
+  border: dotted 2px green;
+}
+
+input[type="submit"]{
+  display: block;
+  margin: 0 auto;
+  display: block;
+}
+
+select:focus{
+  outline: none;
+}
+
+select{
+  background-color: transparent;
+  width: 66%;
+  margin: 0 auto;
+  display: block;
+
+}
+
+
+
+
+
+
+
 .low-usage {
-  background-color: green;
+  background-color: #009900;
 }
 
 .medium-usage {
-  background-color: yellow;
+  background-color: #ffcc66;
 }
 
 .high-usage {
-  background-color: red;
+  background-color: #ff704d;
 }
-
