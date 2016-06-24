@@ -23,15 +23,27 @@
 
 .up-button,
 .down-button{
-  width: 45%;
+  float: left;
+  width: 50%;
 
 }
 
+#temp-display{
+  border-radius: 5px;
+}
 
 
+.low-usage {
+  background-color: #009900;
+}
 
+.medium-usage {
+  background-color: #ffcc66;
+}
 
-
+.high-usage {
+  background-color: #ff704d;
+}
 
 body,input,button{
   font-family: 'Space Mono', monospace;
@@ -68,22 +80,4 @@ select{
   margin: 0 auto;
   display: block;
 
-}
-
-
-
-
-
-
-
-.low-usage {
-  background-color: #009900;
-}
-
-.medium-usage {
-  background-color: #ffcc66;
-}
-
-.high-usage {
-  background-color: #ff704d;
 }
