@@ -1,6 +1,7 @@
 .status-container{
   width: 60%;
   float: left;
+  display: block;
 }
 
 .thermostat-container{
@@ -30,7 +31,13 @@
 
 #temp-display{
   border-radius: 5px;
+  height: 20px;
 }
+
+#current{
+  display: block;
+}
+
 
 
 .low-usage {
