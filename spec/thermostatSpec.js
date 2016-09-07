@@ -1,100 +1,88 @@
 'use strict';
 
-describe('Thermostat', function() {
-  var thermostat;
-  beforeEach(function(){
-    thermostat = new Thermostat();
+describe("Thermostat", function() {
+  describe("checkTemp", function() {
+    it("Starts at 20 degrees", function(){
+      expect(thermostat.checkTemp()).toEqual(20);
+    });
   });
-  it('starts at 20 degrees', function () {
-    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  describe("up", function(){
+    it("increases temperature by 1", function(){
+      thermostat.up();
+      expect(thermostat.checkTemp()).toEqual(21);
+    });
+    it("increases temperature by 2", function(){
+      thermostat.up();
+      thermostat.up();
+      expect(thermostat.checkTemp()).toEqual(22);
+    });
   });
-
-  it('increases in temperature with the up button', function() {
-    thermostat.up();
-    expect(thermostat.getCurrentTemperature()).toEqual(21);
-  });
-
-  it('dereases in temperature with the down button', function() {
-    thermostat.down();
-    expect(thermostat.getCurrentTemperature()).toEqual(19);
-  });
-
-  it('has a minimum of 10 degrees', function() {
-    for (var i = 0; i < 11; i++) {
+  describe("down", function(){
+    it("decreases temperature by 1", function(){
       thermostat.down();
-    }
-    expect(thermostat.getCurrentTemperature()).toEqual(10);
+      expect(thermostat.checkTemp()).toEqual(19);
+    });
+    it("decreases temperature by 2", function(){
+      thermostat.down();
+      thermostat.down();
+      expect(thermostat.checkTemp()).toEqual(18);
+    });
   });
 
-  it('has power saving mode on by default', function(){
-    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+  describe("minimum value:", function(){
+    it("refuses to go below the minimum", function(){
+      for(var i = 1; i < 21; i++){
+        thermostat.down();
+      }
+      expect(thermostat.checkTemp()).toEqual(10);
+    });
   });
 
-	it('can switch PSM off', function() {
-		thermostat.switchPowerSavingModeOff();
-		expect(thermostat.isPowerSavingModeOn()).toBe(false);
-	});
+  describe("Power Saving Mode", function() {
+    it("it is On by default", function() {
+      expect(thermostat._powerSaving).toBe(true)
+    });
 
-	it('can switch PSM on', function() {
-		thermostat.switchPowerSavingModeOff();
-		expect(thermostat.isPowerSavingModeOn()).toBe(false);
-		thermostat.switchPowerSavingModeOn();
-		expect(thermostat.isPowerSavingModeOn()).toBe(true);
-	});
+    it("when On, max temp is 25", function() {
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      expect(thermostat.checkTemp()).toEqual(25)
+    });
+    it("when Off, max temp is 32", function() {
+      thermostat.togglePowerSaving();
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      expect(thermostat.checkTemp()).toEqual(32)
+    });
+  });
 
-	describe('when Power Saving Mode is on', function(){
-		it('has a maximum temperature of 25', function(){
-			for (var i = 0; i < 6; i++) {
-				thermostat.up();
-			}
-			expect(thermostat.getCurrentTemperature()).toEqual(25);
-		});
-	});
+  describe("Reset", function() {
+    it("resets the temperature to 20", function() {
+      for(var i = 1; i < 21; i++){
+        thermostat.up();
+      }
+      thermostat.reset();
+      expect(thermostat.checkTemp()).toEqual(20);
+    });
+  });
 
-
-	describe('when Power Saving Mode is off', function(){
-		it('has a maximum temperature of 32', function(){
-			thermostat.switchPowerSavingModeOff();
-			for (var i = 0; i < 15; i++) {
-				thermostat.up();
-			}
-			expect(thermostat.getCurrentTemperature()).toEqual(32);
-		});
-	});
-
-	it('can be reset to the default temperature',function(){
-		for (var i = 0; i < 6; i++) {
-			thermostat.up();
-		}
-		thermostat.resetTemperature();
-		expect(thermostat.getCurrentTemperature()).toEqual(20);
-	});
-
-
-	describe('displaying usage levels', function() {
-		describe('when the temperature is below 18 degrees', function() {
-			it('it is considered low-usage', function () {
-				for ( var i = 0; i < 3; i++) {
-					thermostat.down();
-				}
-			expect(thermostat.energyUsage()).toEqual('low-usage');
-			});
-		});
-
-		describe('when the temperature is between 18 and 25 degrees', function() {
-			it('it is considered medium-usage', function() {
-				expect(thermostat.energyUsage()).toEqual('medium-usage');
-			});
-		});
-
-		describe('when the temperature is anything else', function () {
-			it('it is considered high-usage', function () {
-				thermostat.powerSavingMode = false;
-				for ( var i = 0; i < 6; i++) {
-					thermostat.up();
-				}
-				expect(thermostat.energyUsage()).toEqual('high-usage');
-			});
-		});
-});
+  describe("Energy usage",function() {
+    it("returns low usage when temperature is below 18", function(){
+      for(var i = 1; i < 5; i++){
+        thermostat.down();
+      }
+      expect(thermostat.energyUsage()).toEqual("low-usage");
+    });
+    it("returns medium usage when temperature is below 25", function(){
+      expect(thermostat.energyUsage()).toEqual("medium-usage");
+    });
+    it("returns high usage when temperature is 25 or higher", function(){
+      for(var i = 1; i < 10; i++){
+        thermostat.up();
+      }
+      expect(thermostat.energyUsage()).toEqual("high-usage");
+    });
+  });
 });
