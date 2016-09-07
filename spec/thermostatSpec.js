@@ -67,7 +67,7 @@ describe("Thermostat", function() {
       expect(thermostat.checkTemp()).toEqual(20);
     });
   });
-
+  
   describe("Energy usage",function() {
     it("returns low usage when temperature is below 18", function(){
       for(var i = 1; i < 5; i++){
