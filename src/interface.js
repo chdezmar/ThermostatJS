@@ -3,7 +3,7 @@ $(document).ready(function() {
   tempBarUpdate(thermostat.checkTemp());
   var update = function(){
     $('#current').text(thermostat.checkTemp() + " power saving mode is " + thermostat._powerSaving);
-    $('#temp-display').attr('class', thermostat.energyUsage());
+    $('#temp-bar').attr('class', thermostat.energyUsage());
   };
   update();
   $('#up').on('click', function(){
