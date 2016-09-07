@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 
-=======
->>>>>>> 6b6e714c6996ecbc8eddac7c7f6cda74241178c5
 <html>
   <head>
     <title>Thermostat</title>
     <link rel="stylesheet" type="text/css" href="src/style.css">
-<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
   </head>
   <body>
     <div class="status-container">
-      <div id="temp-display"></div>
-      <div id="current"></div>
+      <div id="temp-display">
+          <div id="temp-bar"></div>
+      </div>
+        <div id="current"></div>
     </div>
 
 
@@ -25,7 +23,6 @@
     </div>
 
     <div class="weather-container">
-      <div id="weather-display"></div>
       <form id="city-form">
         <select>
           <option value="UK/London">London</option>
@@ -33,31 +30,13 @@
           <option value="FR/Paris">Paris</option>
           <option value="NL/Amsterdam">Amsterdam</option>
         </select>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Check current weather">
       </form>
+      <div id="weather-display"></div>
     </div>
 
     <script src="src/Thermostat.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="src/interface.js"></script>
-=======
-  </head>
-  <body>
-    <section>
-      <h1 id="temperature"></h1>
-      <p>
-        <button id="temperature-up">+</button>
-        <button id="temperature-down">-</button>
-        <button id="temperature-reset">reset</button>
-        power saving mode is <span id="power-saving-status">on</span>
-        <button id="powersaving-on">PSM on</button>
-        <button id="powersaving-off">PSM off</button>
-      </p>
-    </section>
-    <script src="src/thermostat.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-    <script src="src/js/interface.js"></script>
->>>>>>> 6b6e714c6996ecbc8eddac7c7f6cda74241178c5
   </body>
 </html>
